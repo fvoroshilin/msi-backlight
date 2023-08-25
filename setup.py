@@ -4,19 +4,18 @@ from setuptools import setup, find_packages
 
 
 setup(
-    name='msi-perkeyrgb',
+    name='msi-backlight',
     version='2.1',
     description='Configuration tool for per-key RGB keyboards on MSI laptops.',
     long_description=open(
         join(dirname(__file__), 'README.md')).read(),
-    url='https://github.com/Askannz/msi-perkeyrgb',
     author='Robin Lange',
     author_email='robin.langenc@gmail.com',
     license='MIT',
     packages=find_packages(),
     entry_points={
         'console_scripts': [
-            'msi-perkeyrgb=msi_perkeyrgb.main:main',
+            'msi-backlight=msi_perkeyrgb.main:main',
         ],
     },
     package_data={'msi_perkeyrgb': ['protocol_data/presets/*.json']},
