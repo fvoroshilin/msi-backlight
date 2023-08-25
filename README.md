@@ -1,4 +1,4 @@
-msi-perkeyrgb
+msi-backlight
 ==================
 
 This progam allows to control the SteelSeries per-key RGB keyboard backlighting on MSI laptops such as the GE63VR. It *will not work* on models with region-based backlighting (such as GE62VR and others). For those you should use tools like [MSIKLM](https://github.com/Gibtnix/MSIKLM).
@@ -9,22 +9,22 @@ This is an unofficial tool, I am not affiliated to MSI nor SteelSeries in any wa
 Installation
 ----------
 
-If you are on Archlinux, use this AUR package : [msi-perkeyrgb](https://aur.archlinux.org/packages/msi-perkeyrgb/) (not up-to-date with the Git version yet)
+If you are on Archlinux, use this AUR package : [msi-backlight](https://aur.archlinux.org/packages/msi-perkeyrgb/) (not up-to-date with the Git version yet)
 
 For Debian or others :
 
 ```
-git clone https://github.com/Deathle55/msi-perkeyrgb
-cd msi-perkeyrgb/
+git clone https://github.com/Deathle55/msi-backlight
+cd msi-backlight/
 sudo python3 setup.py install
 sudo cp 99-msi-rgb.rules /etc/udev/rules.d/
 sudo udevadm control --reload-rules
 ```
 pre-sets:
 ```
-msi-perkeyrgb -p default
-msi-perkeyrgb -p aqua
-msi-perkeyrgb --model GS65 -p plain
+msi-backlight -p default
+msi-backlight -p aqua
+msi-backlight --model GS65 -p plain
 ```
 backlight.msi:
 ```
@@ -32,23 +32,23 @@ all steady ffffff
 arrows steady ffff00
 fn steady ffc800
 
-msi-perkeyrgb -c backlight.msi
+msi-backlight -c backlight.msi
 how to turn it off
-msi-perkeyrgb -d
+msi-backlight -d
 ```
 Simple usage
 Steady color:
 ```
-msi-perkeyrgb --model <MSI model> -s <COLOR>
+msi-backlight --model <MSI model> -s <COLOR>
 ```
 Built-in preset (see --list-presets for available options):
 ```
-msi-perkeyrgb --model <MSI model> -p <preset>
+msi-backlight --model <MSI model> -p <preset>
 ```
 Advanced usage
 Set from configuration file:
 ```
-msi-perkeyrgb --model <MSI model> -c <path to your configuration file>
+msi-backlight --model <MSI model> -c <path to your configuration file>
 ```
 
 Features
@@ -108,21 +108,21 @@ Usage
 
 Steady color :
 ```
-msi-perkeyrgb --model <MSI model> -s <COLOR>
+msi-backlight --model <MSI model> -s <COLOR>
 ```
 
 Built-in preset (see `--list-presets` for available options) :
 ```
-msi-perkeyrgb --model <MSI model> -p <preset>
+msi-backlight --model <MSI model> -p <preset>
 ```
 
 ### Advanced usage
 
 Set from configuration file :
 ```
-msi-perkeyrgb --model <MSI model> -c <path to your configuration file>
+msi-backlight --model <MSI model> -c <path to your configuration file>
 ```
-The configuration file allows you to set individual key configurations. It can have any extension. See the [dedicated wiki page](https://github.com/Askannz/msi-perkeyrgb/wiki/Configuration-file-guide) for its syntax and examples.
+The configuration file allows you to set individual key configurations. It can have any extension. See the [dedicated wiki page](https://github.com/Askannz/msi-backlight/wiki/Configuration-file-guide) for its syntax and examples.
 
 
 How does it work, and credits
@@ -132,7 +132,7 @@ The SteelSeries keyboard is connected to the MSI laptop by two independent inter
 * A PS/2 interface to send keypresses
 * a USB HID-compliant interface to receive RGB commands
 
-Talking to the RGB controller from Linux is a matter of sending the correct binary packets on the USB HID interface. I used Wireshark to capture the traffic between the SteelSeries Engine on Windows and the keyboard, and then analyzed the captured data to figure out the protocol used. I was only able to reverse-engineer the simple "steady color" commands, but that work was massively improved upon by [TauAkiou](https://github.com/TauAkiou), who figured out the rest of the protocol and implemented the remaining effects (UPDATE: effects support been disabled for now, for security reasons. See https://github.com/Askannz/msi-perkeyrgb/issues/24 ). His work include an amazingly detailed write-up of the protocol which you can read [here](documentation/0b_packet_information/msi-kb-effectdoc).
+Talking to the RGB controller from Linux is a matter of sending the correct binary packets on the USB HID interface. I used Wireshark to capture the traffic between the SteelSeries Engine on Windows and the keyboard, and then analyzed the captured data to figure out the protocol used. I was only able to reverse-engineer the simple "steady color" commands, but that work was massively improved upon by [TauAkiou](https://github.com/TauAkiou), who figured out the rest of the protocol and implemented the remaining effects (UPDATE: effects support been disabled for now, for security reasons. See https://github.com/Askannz/msi-backlight/issues/24 ). His work include an amazingly detailed write-up of the protocol which you can read [here](documentation/0b_packet_information/msi-kb-effectdoc).
 
 Also thanks to [tbh1](https://github.com/tbh1) for providing packet dumps of presets effects.
 
